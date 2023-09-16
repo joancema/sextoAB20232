@@ -1,0 +1,1 @@
+export {getPokemonById} from './getPokemon'
