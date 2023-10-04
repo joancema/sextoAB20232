@@ -14,7 +14,7 @@ model UserModel {
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
-  posts OptionsModel[]
+  options OptionsModel[]
 }
 
 model OptionsModel {
