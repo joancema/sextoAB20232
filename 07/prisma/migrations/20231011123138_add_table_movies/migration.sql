@@ -1,4 +1,21 @@
 -- CreateTable
+CREATE TABLE "todo" (
+    "id" SERIAL NOT NULL,
+    "text" VARCHAR NOT NULL,
+    "completedAt" TIMESTAMP,
+
+    CONSTRAINT "todo_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "otro" (
+    "id" SERIAL NOT NULL,
+    "text" VARCHAR NOT NULL,
+
+    CONSTRAINT "otro_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "UserModel" (
     "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
@@ -15,6 +32,15 @@ CREATE TABLE "OptionsModel" (
     "userId" INTEGER NOT NULL,
 
     CONSTRAINT "OptionsModel_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Movies" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "genre" TEXT,
+
+    CONSTRAINT "Movies_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex

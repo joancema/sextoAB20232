@@ -33,3 +33,9 @@ model OptionsModel {
   user      UserModel   @relation(fields: [userId], references: [id])
   userId  Int
 }
+
+model Movies {
+  id        Int     @id @default(autoincrement())
+  name      String
+  genre     String?
+}
