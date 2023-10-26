@@ -23,3 +23,21 @@ model Option {
   user    User    @relation(fields: [userId], references: [id])
   userId  Int
 }
+
+
+
+model Computer {
+    number        Int     @id @default(autoincrement())
+    name     String
+    price   Float
+    description     String
+    parts Part[]
+}
+model Part {
+    number        Int     @id @default(autoincrement())
+    name     String
+    price   Float
+    description     String
+    computer    Computer    @relation(fields: [computerId], references: [number])
+    computerId  Int
+}
