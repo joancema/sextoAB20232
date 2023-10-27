@@ -2,7 +2,10 @@ version: '3'
 
 services:
   api:
-    build: .
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
     depends_on:
       - postgres-db
     environment:
@@ -11,6 +14,7 @@ services:
       - POSTGRES_URL=${POSTGRES_URL}
     ports:
       - ${PORT}:${PORT}
+    restart: always
   postgres-db:
     image: postgres:15.3
     restart: always
