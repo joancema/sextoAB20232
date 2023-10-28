@@ -28,8 +28,9 @@ export class CustomersController {
     if ( error ) return res.status(400).json({ error });
 
     const { vehicles, ...rest } = createCustomerDto!;
+    console.log(vehicles);
     const customer = await prisma.customer.create({
-      data: rest
+      data: {...rest, vehicles: { create: vehicles } }
     });
 
     res.json( customer );
