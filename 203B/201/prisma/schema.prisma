@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+model Customer {
+  id        Int     @id @default(autoincrement())
+  code String  @unique
+  name      String
+  address      String?
+  phone      String?
+  vehicles Vehicle[]
+}
+
+model Employee {
+  id        Int     @id @default(autoincrement())
+  code String  @unique
+  name      String
+  address      String?
+  phone      String?
+  transactions Transaction[]
+}
+
+model Vehicle {
+  id        Int     @id @default(autoincrement())
+  code String  @unique
+  detail      String?
+  transactions Transaction[]
+  customer      Customer   @relation(fields: [customerId], references: [id])
+  customerId  Int
+}
+
+model Fuel {
+  id        Int     @id @default(autoincrement())
+  description      String
+  price     Decimal
+  transactions Transaction[]
+}
+
+
+model Pump {
+  id        Int     @id @default(autoincrement())
+  description      String
+  transactions Transaction[]
+}
+
+model Transaction {
+  id        Int     @id @default(autoincrement())
+  date      DateTime
+  detail    String
+  vehicle      Vehicle   @relation(fields: [vehicleId], references: [id])
+  vehicleId  Int
+  employee      Employee   @relation(fields: [employeeId], references: [id])
+  employeeId  Int
+  pump      Pump   @relation(fields: [pumpId], references: [id])
+  pumpId  Int
+  fuel      Fuel   @relation(fields: [fuelId], references: [id])
+  fuelId  Int
+}

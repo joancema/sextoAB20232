@@ -1,0 +1,66 @@
+version: '3'
+
+
+services:
+  microservicio1:
+    api:
+    stdin_open: true
+    build:
+      context: ./201
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres-db1
+    environment:
+      - PORT=${PORT}
+      - PUBLIC_PATH=${PUBLIC_PATH}
+      - POSTGRES_URL=${POSTGRES_URL}
+    ports:
+      - ${PORT}:${PORT}
+    restart: always
+  microservicio2:
+    api:
+    stdin_open: true
+    build:
+      context: ./202
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres-db2
+    environment:
+      - PORT=${PORT2}
+      - PUBLIC_PATH=${PUBLIC_PATH2}
+      - POSTGRES_URL=${POSTGRES_URL2}
+    ports:
+      - ${PORT2}:${PORT2}
+    restart: always
+  postgres-db1:
+    image: postgres:15.3
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+  postgres-db2:
+    image: postgres:15.3
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    ports:
+      - 5434:5432
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - microservicio1
+      - microservicio2
+    
