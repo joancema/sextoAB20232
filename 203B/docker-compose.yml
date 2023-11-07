@@ -35,8 +35,6 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ./postgres:/var/lib/postgresql/data
-    ports:
-      - 5433:5432
   postgres-db2:
     image: postgres:15.3
     restart: always
@@ -45,9 +43,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - ./postgres:/var/lib/postgresql/data
-    ports:
-      - 5434:5432
+      - ./postgres2:/var/lib/postgresql/data
   nginx:
     image: nginx:latest
     ports:
