@@ -10,7 +10,7 @@ export abstract class CustomerRepository {
   abstract getAll(): Promise<CustomerEntity[]>;
 
   abstract findById( id: number ): Promise<CustomerEntity>;
-  abstract updateById( updateTodoDto: UpdateCustomerDto ): Promise<CustomerEntity>;
+  abstract updateById( updateCustomerDto: UpdateCustomerDto ): Promise<CustomerEntity>;
   abstract deleteById( id: number ): Promise<CustomerEntity>;
 
 }
