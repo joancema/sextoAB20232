@@ -3,7 +3,6 @@ version: '3'
 
 services:
   microservicio1:
-    api:
     stdin_open: true
     build:
       context: ./201
@@ -14,11 +13,8 @@ services:
       - PORT=${PORT}
       - PUBLIC_PATH=${PUBLIC_PATH}
       - POSTGRES_URL=${POSTGRES_URL}
-    ports:
-      - ${PORT}:${PORT}
     restart: always
   microservicio2:
-    api:
     stdin_open: true
     build:
       context: ./202
@@ -26,11 +22,9 @@ services:
     depends_on:
       - postgres-db2
     environment:
-      - PORT=${PORT2}
+      - PORT=${PORT}
       - PUBLIC_PATH=${PUBLIC_PATH2}
       - POSTGRES_URL=${POSTGRES_URL2}
-    ports:
-      - ${PORT2}:${PORT2}
     restart: always
   postgres-db1:
     image: postgres:15.3
